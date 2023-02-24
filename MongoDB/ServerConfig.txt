@@ -1,8 +1,49 @@
 How to setup MongoDB server in a EC2 Instance
 
-Step 1:
+STEP 1: Install the mongodb in system
       A. Download the MongoDB installer from link.
       https://www.mongodb.com/try/download/community
       
       B. Install mongodb in local system and set the data directory and log directory at the time of installation.
+      C. Download mongo shell  (https://www.mongodb.com/try/download/shell)
+      D. Move the mongosh into the bin folder.
+
+STEO 2: Run the mongodb from shell
+      A. run mongoshell from bin
+
+STEP 3: Set mongodb user name and password
+      A. move to admin (use admin)
+      B. Run the commend to create the new user
+      db.createUser(
+        {
+          user: "root",
+          pwd: "root",
+          roles: [
+                    { role: 'root', db: 'admin' }
+                  ]
+        }
+      )
+      
+      db.getUsers();
+      db.dropUser("root");
+      
+      To manage the role:
+      https://www.mongodb.com/docs/manual/reference/built-in-roles/
+      
+      
+      
+      C. Stop the MongoDB service from windows services
+      D. Update the mongod.conf file
+      # network interfaces
+            net:
+              port: 27017
+              bindIp: 0.0.0.0
+            security:
+                  authorization: enabled
+                
+      E. Start the MongoDB service from windows services
+      F. Enable the port 27017 from windows inbound firewall
+      
+      
+
       
