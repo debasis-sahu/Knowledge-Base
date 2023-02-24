@@ -1,1 +1,8 @@
-# How to setup MongoDB server in a EC2 Instance
+How to setup MongoDB server in a EC2 Instance
+
+Step 1:
+      A. Download the MongoDB installer from link.
+      https://www.mongodb.com/try/download/community
+      
+      B. Install mongodb in local system and set the data directory and log directory at the time of installation.
+      
