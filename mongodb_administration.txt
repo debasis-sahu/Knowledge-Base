@@ -1,0 +1,46 @@
+-----Start the mongodb shell----
+mongosh "mongodb://user_name:password@localhost:27017"
+
+-----Seel the list of all users/database/roles/permissions-----
+1. select the admin database first
+    "use admin"
+
+Run the set of commands for the requirements
+show databases
+db.getUsers()
+show users
+
+
+
+
+
+-----Create New Users with roles-----
+use admin
+db.createUser({
+  user: "usr_debasis",
+  pwd: "********",
+  roles: [
+	{role: "readWrite", db: "debasis_test"},
+    {role: "readWrite", db: "debasis_test1"},
+	{role: "readWrite", db: "debasis_test2"},
+    {role: "readWrite", db: "debasis_test3"}
+  ]
+});
+
+-----Grand Additional roles to user-----
+db.grantRolesToUser("usr_debasis", [
+  {role: "readWrite", db: "ba_testlive"}
+]);
+-----Revoke specific access from a user-----
+db.revokeRolesFromUser("usr_debasis", [
+  {role: "readWrite", db: "ba_prodlive"}
+]);
+
+
+-----Drop User-----
+db.dropUser("usr_debasis");
+
+----------
+----------
+
+
