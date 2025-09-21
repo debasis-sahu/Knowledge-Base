@@ -12,6 +12,97 @@ show users
 
 
 
+----------Create any specific user with few Database only--------------
+use admin
+--Role Management
+db.dropRole("ZooBurgDBs");
+db.createRole({
+  role: "ZooBurgDBs",
+  privileges:[],
+  roles: [
+    { role: "read", db: "zooburg_prod" },
+    { role: "read", db: "zooburg_test" }
+  ]
+});
+db.getRole("ZooBurgDBs");
+
+---User Management
+db.dropUser("zooburg_admin");
+db.createUser({
+  user: "zooburg_admin",
+  pwd: "ZooB789",
+  roles: []
+});
+db.getUser("zooburg_admin");
+db.grantRolesToUser("zooburg_admin", [
+  { role: "dbAdmin", db: "zooburg_prod" }
+]);
+db.revokeRolesFromUser("zooburg_admin", [
+  { role: "dbAdmin", db: "zooburg_prod" }
+])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(or)
+db.createUser({
+  user: "root",
+  pwd: "root",
+  roles: [
+    { role: "root", db: "admin" }
+  ]
+})
+
+-----See which are the roles available under user
+db.getUser("zooburg_admin");
+
+-----Grand Roles to User
+db.grantRolesToUser("zooburg_admin", [
+  { role: "ZooBurgDBs", db: "zooburg_prod" }
+]);
+
+-----Revoke Roles from User
+db.revokeRolesFromUser("zooburg_admin", [
+  { role: "readWrite", db: "zooburg_prod" }
+])
+
+db.dropUser("zooburg_admin");
+
+
+
+----------How to change Password----------
+use admin
+db.updateUser("zooburg_admin", {
+  pwd: "ZooB789"
+});
+
+
+
+
+
+
+
+
+
+
 
 
 -----Create New Users with roles-----
